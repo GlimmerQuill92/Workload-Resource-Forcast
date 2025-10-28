@@ -1,0 +1,21 @@
+<section class="screen">
+  <h1>Battle!</h1>
+  <p>A Goblin appears. It looks annoyed.</p>
+
+  <div class="actions">
+    <button id="attackBtn">Attack (-1 HP)</button>
+    <a href="#/home">Run back to the square</a>
+  </div>
+
+  <script type="module">
+    import { state, renderFooter } from '../js/state.js';
+    import { save } from '../js/storage.js';
+
+    document.getElementById('attackBtn').addEventListener('click', () => {
+      state.player.hp = Math.max(0, state.player.hp - 1);
+      state.flags.lastAction = 'attack';
+      save(); // persists + updates footer
+      alert(`You attack! Your HP is now ${state.player.hp}.`);
+    });
+  </script>
+</section>
