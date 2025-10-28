@@ -1,0 +1,12 @@
+:root { font-family: system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #111; color: #eee; }
+.topbar, .statusbar { background: #222; padding: .5rem 1rem; display: flex; gap: 1rem; align-items: center; }
+.topbar a { color: #9fd; text-decoration: none; }
+.topbar a:hover { text-decoration: underline; }
+main { padding: 1rem; }
+.screen { max-width: 720px; }
+.actions { display: flex; gap: .75rem; margin-top: 1rem; }
+button { cursor: pointer; padding: .5rem .75rem; border: 1px solid #444; background: #333; color: #fff; border-radius: .25rem; }
+button:hover { background: #3a3a3a; }
+a { color: #9fd; }
