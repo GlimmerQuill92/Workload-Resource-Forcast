@@ -31,17 +31,26 @@
 
 <div class="main">
 <aside class="side">
-<h3>Views</h3>
-<div class="list">
-<button id="view-personal" class="active">Personal</button>
-<button id="view-projects">Projects</button>
-<button id="view-report">Report</button>
-</div>
-<h3>People</h3>
-<div id="peopleList" class="list"></div>
-<h3>Projects</h3>
-<div id="projectsList" class="list"></div>
+<h3 style="display:flex; align-items:center; justify-content:space-between">People
+<span>
+<button class="btn" id="addPeopleGroup" title="Add People Group">＋ Group</button>
+<button class="btn primary" id="addPersonSidebar" title="Add Person">＋ Person</button>
+</span>
+</h3>
+<div id="peopleTree" class="list"></div>
+
+
+<h3 style="margin-top:14px; display:flex; align-items:center; justify-content:space-between">Projects
+<span>
+<button class="btn" id="addProjectGroup" title="Add Project Group">＋ Group</button>
+<button class="btn" id="addProjectSub" title="Add Subgroup">＋ Sub</button>
+<button class="btn primary" id="addProjectSidebar" title="Add Project">＋ Project</button>
+</span>
+</h3>
+<div id="projectsTree" class="list"></div>
 </aside>
+
+
 <section class="content" id="content"></section>
 </div>
 
