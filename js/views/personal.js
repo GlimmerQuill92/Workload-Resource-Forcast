@@ -1,4 +1,36 @@
 import { state, getAllocation, setAllocation, updateProject } from '../state.js';
+<thead>${head}</thead>
+<tbody>${rows}</tbody>
+<tfoot>
+<tr>
+<th class="sticky-col" style="left:0">Week Total %</th>
+<th class="sticky-col-2" style="left:180px">(All rows)</th>
+${weeks.map(d=>`<th class="num" data-week-total="${d}"></th>`).join('')}
+<th></th>
+</tr>
+</tfoot>
+</table>
+</div>
+<div class="divider"></div>
+<div class="cards">
+${state.projects.map(pr=>projectCard(pr)).join('')}
+</div>
+`;
+
+
+// Wire up events
+content.addEventListener('click', e=>{
+const btn = e.target.closest('[data-person-tab]');
+if(btn){ ctx.activePersonId = btn.getAttribute('data-person-tab'); ctx.activateView('personal'); }
+});
+content.addEventListener('change', e=>{
+const el = e.target.closest('input[data-alloc]');
+if(el){ const [pid, proj, day] = el.getAttribute('data-alloc').split('|'); setAllocation(pid, proj, day, el.value); refreshTotals(ctx); }
+});
+
+
+refreshTotals(ctx);
+}
 
 
 function projectCard(pr){
