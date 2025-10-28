@@ -1,60 +1,124 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Resource Allocator</title>
-<link rel="stylesheet" href="./css/styles.css" />
-</head>
-<body>
-<header>
-<h1>Resource Allocator</h1>
-<span class="tag">Modular • Local only</span>
-
-
-<div class="toolbar grow">
-<button class="btn primary" id="addPerson">Add Person</button>
-<button class="btn" id="addProject">Add Project</button>
-<button class="btn" id="exportBtn">Export JSON</button>
-<label class="btn ghost" for="importFile">Import JSON</label>
-<input id="importFile" type="file" accept="application/json" hidden>
-<button class="btn" id="resetBtn">Reset</button>
-<div class="toolbar-right">
-<label class="help">Weeks</label>
-<input class="input" id="numWeeks" type="number" min="4" max="52" value="16">
-<label class="help">Start week</label>
-<input class="input" id="startDate" type="date">
-</div>
-</div>
-</header>
-
-
-<div class="main">
-<aside class="side">
-<h3 style="display:flex; align-items:center; justify-content:space-between">People
-<span>
-<button class="btn" id="addPeopleGroup" title="Add People Group">＋ Group</button>
-<button class="btn primary" id="addPersonSidebar" title="Add Person">＋ Person</button>
-</span>
-</h3>
-<div id="peopleTree" class="list"></div>
-
-
-<h3 style="margin-top:14px; display:flex; align-items:center; justify-content:space-between">Projects
-<span>
-<button class="btn" id="addProjectGroup" title="Add Project Group">＋ Group</button>
-<button class="btn" id="addProjectSub" title="Add Subgroup">＋ Sub</button>
-<button class="btn primary" id="addProjectSidebar" title="Add Project">＋ Project</button>
-</span>
-</h3>
-<div id="projectsTree" class="list"></div>
-</aside>
-
-
-<section class="content" id="content"></section>
-</div>
-
-
-<script type="module" src="./js/main.js"></script>
-</body>
-</html>
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+index 388683d142c752f760190ec64c13b0961c382829..c65f26cefd2d9f075ef6b0803df5597803455bab 100644
+--- a/index.html
++++ b/index.html
+@@ -1,60 +1,58 @@
+ <!doctype html>
+ <html lang="en">
+-<head>
+-<meta charset="utf-8" />
+-<meta name="viewport" content="width=device-width, initial-scale=1" />
+-<title>Resource Allocator</title>
+-<link rel="stylesheet" href="./css/styles.css" />
+-</head>
+-<body>
+-<header>
+-<h1>Resource Allocator</h1>
+-<span class="tag">Modular • Local only</span>
+-
+-
+-<div class="toolbar grow">
+-<button class="btn primary" id="addPerson">Add Person</button>
+-<button class="btn" id="addProject">Add Project</button>
+-<button class="btn" id="exportBtn">Export JSON</button>
+-<label class="btn ghost" for="importFile">Import JSON</label>
+-<input id="importFile" type="file" accept="application/json" hidden>
+-<button class="btn" id="resetBtn">Reset</button>
+-<div class="toolbar-right">
+-<label class="help">Weeks</label>
+-<input class="input" id="numWeeks" type="number" min="4" max="52" value="16">
+-<label class="help">Start week</label>
+-<input class="input" id="startDate" type="date">
+-</div>
+-</div>
+-</header>
+-
+-
+-<div class="main">
+-<aside class="side">
+-<h3 style="display:flex; align-items:center; justify-content:space-between">People
+-<span>
+-<button class="btn" id="addPeopleGroup" title="Add People Group">＋ Group</button>
+-<button class="btn primary" id="addPersonSidebar" title="Add Person">＋ Person</button>
+-</span>
+-</h3>
+-<div id="peopleTree" class="list"></div>
+-
+-
+-<h3 style="margin-top:14px; display:flex; align-items:center; justify-content:space-between">Projects
+-<span>
+-<button class="btn" id="addProjectGroup" title="Add Project Group">＋ Group</button>
+-<button class="btn" id="addProjectSub" title="Add Subgroup">＋ Sub</button>
+-<button class="btn primary" id="addProjectSidebar" title="Add Project">＋ Project</button>
+-</span>
+-</h3>
+-<div id="projectsTree" class="list"></div>
+-</aside>
+-
+-
+-<section class="content" id="content"></section>
+-</div>
+-
+-
+-<script type="module" src="./js/main.js"></script>
+-</body>
++  <head>
++    <meta charset="utf-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1" />
++    <title>Resource Allocator MVP</title>
++    <link rel="stylesheet" href="./css/styles.css" />
++  </head>
++  <body>
++    <header>
++      <h1>Resource Allocator</h1>
++      <span class="tag">MVP • Local only</span>
++      <div class="toolbar grow">
++        <button class="btn primary" id="addPerson">Add Person</button>
++        <button class="btn" id="addProject">Add Project</button>
++        <button class="btn" id="exportBtn">Export JSON</button>
++        <label class="btn ghost" for="importFile">Import JSON</label>
++        <input id="importFile" type="file" accept="application/json" hidden />
++        <button class="btn" id="resetBtn">Reset</button>
++        <div class="toolbar-right">
++          <label class="help" for="numWeeks">Weeks</label>
++          <input
++            class="input"
++            id="numWeeks"
++            type="number"
++            min="4"
++            max="52"
++            value="16"
++            aria-label="Number of weeks"
++          />
++          <label class="help" for="startDate">Start week</label>
++          <input class="input" id="startDate" type="date" />
++        </div>
++      </div>
++    </header>
++
++    <div class="main">
++      <aside class="side">
++        <h3>Views</h3>
++        <div class="list" id="viewsList">
++          <button id="view-personal" class="active">Personal</button>
++          <button id="view-projects">Projects</button>
++          <button id="view-report">Report</button>
++        </div>
++
++        <h3 style="margin-top: 14px">People</h3>
++        <div id="peopleList" class="list"></div>
++
++        <h3 style="margin-top: 14px">Projects</h3>
++        <div id="projectsList" class="list"></div>
++      </aside>
++
++      <section class="content" id="content"></section>
++    </div>
++
++    <script type="module" src="./js/main.js"></script>
++  </body>
+ </html>
+ 
+EOF
+)
