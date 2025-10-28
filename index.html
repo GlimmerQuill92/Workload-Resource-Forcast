@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>My HTML Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <nav>
+      <a href="#/home">Home</a>
+      <a href="#/battle">Battle</a>
+    </nav>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <!-- Screens will be injected here -->
+  </main>
+
+  <footer class="statusbar">
+    <span id="playerName"></span>
+    <span id="playerHP"></span>
+  </footer>
+
+  <script type="module">
+    import { initRouter } from './js/router.js';
+    import { state, renderFooter } from './js/state.js';
+    import './js/storage.js'; // sets up autosave/load
+
+    // Example initial state
+    if (!state.player.name) state.player.name = 'Aerin';
+    if (state.player.hp == null) state.player.hp = 20;
+
+    renderFooter();
+
+    initRouter({
+      defaultRoute: 'home',
+      mountSelector: '#app',
+      screensDir: './screens'
+    });
+  </script>
+</body>
+</html>
