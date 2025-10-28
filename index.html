@@ -1,44 +1,51 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>My HTML Game</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="./css/styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Resource Allocator</title>
+<link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <nav>
-      <a href="#/home">Home</a>
-      <a href="#/battle">Battle</a>
-    </nav>
-  </header>
+<header>
+<h1>Resource Allocator</h1>
+<span class="tag">Modular • Local only</span>
 
-  <main id="app" aria-live="polite">
-    <!-- Screens will be injected here -->
-  </main>
 
-  <footer class="statusbar">
-    <span id="playerName"></span>
-    <span id="playerHP"></span>
-  </footer>
+<div class="toolbar grow">
+<button class="btn primary" id="addPerson">Add Person</button>
+<button class="btn" id="addProject">Add Project</button>
+<button class="btn" id="exportBtn">Export JSON</button>
+<label class="btn ghost" for="importFile">Import JSON</label>
+<input id="importFile" type="file" accept="application/json" hidden>
+<button class="btn" id="resetBtn">Reset</button>
+<div class="toolbar-right">
+<label class="help">Weeks</label>
+<input class="input" id="numWeeks" type="number" min="4" max="52" value="16">
+<label class="help">Start week</label>
+<input class="input" id="startDate" type="date">
+</div>
+</div>
+</header>
 
-  <script type="module">
-    import { initRouter } from './js/router.js';
-    import { state, renderFooter } from './js/state.js';
-    import './js/storage.js'; // sets up autosave/load
 
-    // Example initial state
-    if (!state.player.name) state.player.name = 'Aerin';
-    if (state.player.hp == null) state.player.hp = 20;
+<div class="main">
+<aside class="side">
+<h3>Views</h3>
+<div class="list">
+<button id="view-personal" class="active">Personal</button>
+<button id="view-projects">Projects</button>
+<button id="view-report">Report</button>
+</div>
+<h3>People</h3>
+<div id="peopleList" class="list"></div>
+<h3>Projects</h3>
+<div id="projectsList" class="list"></div>
+</aside>
+<section class="content" id="content"></section>
+</div>
 
-    renderFooter();
 
-    initRouter({
-      defaultRoute: 'home',
-      mountSelector: '#app',
-      screensDir: './screens'
-    });
-  </script>
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>
